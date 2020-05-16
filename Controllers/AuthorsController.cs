@@ -8,11 +8,8 @@ namespace LagendaBackend.Controllers
 {
 	public class AuthorsController : JsonApiController<Author>
 	{
-		public AuthorsController(
-			IJsonApiOptions jsonApiOptions,
-			IResourceService<Author, int> resourceService,
-			ILoggerFactory loggerFactory = null)
-			: base(jsonApiOptions, resourceService, loggerFactory)
-		{ }
+		public AuthorsController(IJsonApiContext jsonApiContext, IResourceService<Author, int> resourceService, ILoggerFactory loggerFactory) : base(jsonApiContext, resourceService, loggerFactory)
+		{
+		}
 	}
 }

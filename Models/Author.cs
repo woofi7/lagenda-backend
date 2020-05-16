@@ -12,10 +12,19 @@ namespace LagendaBackend.Models
 		[Attr("last-name")]
 		public string LastName { get; set; }
 
+		[Attr("title")]
+		public string Title { get; set; }
+
 		[Attr("desc")]
 		public string Desc { get; set; }
 
+		[Attr("collaborator")]
+		public bool Collaborator { get; set; }
+
 		[HasOne("image")]
 		public Image Image { get; set; }
+
+		[HasMany("social-links")]
+		public ICollection<SocialLink> SocialLinks { get; set; }
 	}
 }

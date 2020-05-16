@@ -11,10 +11,9 @@ namespace LagendaBackend.Controllers
 	public class ArticleCategoriesController : JsonApiController<ArticleCategory>
 	{
 		public ArticleCategoriesController(
-			IJsonApiOptions jsonApiOptions,
+			IJsonApiContext jsonApiContext,
 			IResourceService<ArticleCategory, int> resourceService,
-			ILoggerFactory loggerFactory = null)
-			: base(jsonApiOptions, resourceService, loggerFactory)
+			ILoggerFactory loggerFactory) : base(jsonApiContext, resourceService, loggerFactory)
 		{ }
 	}
 }

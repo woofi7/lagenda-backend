@@ -8,11 +8,8 @@ namespace LagendaBackend.Controllers
 {
 	public class ImagesController : JsonApiController<Image>
 	{
-		public ImagesController(
-			IJsonApiOptions jsonApiOptions,
-			IResourceService<Image, int> resourceService,
-			ILoggerFactory loggerFactory = null)
-			: base(jsonApiOptions, resourceService, loggerFactory)
-		{ }
+		public ImagesController(IJsonApiContext jsonApiContext, IResourceService<Image, int> resourceService, ILoggerFactory loggerFactory) : base(jsonApiContext, resourceService, loggerFactory)
+		{
+		}
 	}
 }

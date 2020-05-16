@@ -29,5 +29,6 @@ namespace LagendaBackend.Models
 		public DbSet<BaladoCategory> BaladoCategories { get; set; }
 		public DbSet<Image> Images { get; set; }
 		public DbSet<ArticleAuthor> ArticleAuthors { get; set; }
+		public DbSet<SocialLink> SocialLinks { get; set; }
 	}
 }
