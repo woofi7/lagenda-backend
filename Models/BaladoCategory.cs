@@ -8,6 +8,9 @@ namespace LagendaBackend.Models
 		[Attr("name")]
 		public string Name { get; set; }
 
+		[Attr("order")]
+		public int? Order { get; set; }
+
 		[HasMany("balados")]
 		public ICollection<Balado> Balados { get; set; }
 	}

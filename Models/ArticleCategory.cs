@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using JsonApiDotNetCore.Models;
 
@@ -7,6 +8,9 @@ namespace LagendaBackend.Models
 	{
 		[Attr("name")]
 		public string Name { get; set; }
+
+		[Attr("order")]
+		public int? Order { get; set; }
 
 		[HasMany("articles")]
 		public ICollection<Article> Articles { get; set; }

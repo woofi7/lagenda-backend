@@ -21,6 +21,9 @@ namespace LagendaBackend.Models
 		[Attr("collaborator")]
 		public bool Collaborator { get; set; }
 
+		[Attr("order")]
+		public int? Order { get; set; }
+
 		[HasOne("image")]
 		public Image Image { get; set; }
 
