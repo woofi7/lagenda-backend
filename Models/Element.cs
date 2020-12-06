@@ -17,6 +17,9 @@ namespace LagendaBackend.Models
 		[Attr("desc")]
 		public string Desc { get; set; }
 
+		[Attr("unlisted")]
+		public bool Unlisted { get; set; }
+
 		[HasOne("image")]
 		public Image Image { get; set; }
 	}
