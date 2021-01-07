@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using JsonApiDotNetCore.Models;
 using LagendaBackend.Models.ManyToMany;
 
@@ -29,5 +30,10 @@ namespace LagendaBackend.Models
 
 		[HasMany("social-links")]
 		public ICollection<SocialLink> SocialLinks { get; set; }
+
+		[NotMapped]
+		[HasManyThrough(nameof(ArticleAuthors))]
+		public List<Article> Articles { get; set; }
+		public List<ArticleAuthor> ArticleAuthors { get; set; }
 	}
 }

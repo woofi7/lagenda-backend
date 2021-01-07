@@ -73,7 +73,7 @@ namespace LagendaBackend
 
 
 			app.UseJsonApi();
-			//app.UseHttpsRedirection();
+			app.UseHttpsRedirection();
 			app.UseMvc();
 		}
 	}
