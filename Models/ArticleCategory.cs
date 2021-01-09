@@ -12,6 +12,9 @@ namespace LagendaBackend.Models
 		[Attr("order")]
 		public int? Order { get; set; }
 
+		[HasOne("image")]
+		public Image Image { get; set; }
+
 		[HasMany("articles")]
 		public ICollection<Article> Articles { get; set; }
 	}
