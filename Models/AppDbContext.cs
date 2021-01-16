@@ -1,7 +1,5 @@
-using System;
 using LagendaBackend.Models.ManyToMany;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace LagendaBackend.Models
 {
@@ -12,8 +10,11 @@ namespace LagendaBackend.Models
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseMySql("Server=localhost;Database=lagenda_api;Password=[x#[t?RCaGSZ#9r7;User=lagenda;", mySqlOptions => mySqlOptions
-				.ServerVersion(new Version(5, 7, 29), ServerType.MySql));
+			var connectionString = "Server=localhost;Database=lagenda_api;Password=[x#[t?RCaGSZ#9r7;User=lagenda;";
+			optionsBuilder.UseMySql(connectionString,
+				ServerVersion.AutoDetect(connectionString),
+				mySqlOptions => mySqlOptions.EnableRetryOnFailure()
+				);
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

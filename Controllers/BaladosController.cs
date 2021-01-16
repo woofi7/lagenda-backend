@@ -8,7 +8,8 @@ namespace LagendaBackend.Controllers
 {
 	public class BaladosController : JsonApiController<Balado>
 	{
-		public BaladosController(IJsonApiContext jsonApiContext, IResourceService<Balado, int> resourceService, ILoggerFactory loggerFactory) : base(jsonApiContext, resourceService, loggerFactory)
+		public BaladosController(IJsonApiOptions options, ILoggerFactory loggerFactory, IResourceService<Balado, int> resourceService)
+			: base(options, loggerFactory, resourceService)
 		{
 		}
 	}

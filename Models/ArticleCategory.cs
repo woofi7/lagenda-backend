@@ -1,21 +1,21 @@
-using System;
 using System.Collections.Generic;
-using JsonApiDotNetCore.Models;
+using JsonApiDotNetCore.Resources;
+using JsonApiDotNetCore.Resources.Annotations;
 
 namespace LagendaBackend.Models
 {
 	public class ArticleCategory : Identifiable
 	{
-		[Attr("name")]
+		[Attr(PublicName = "name")]
 		public string Name { get; set; }
 
-		[Attr("order")]
+		[Attr(PublicName = "order")]
 		public int? Order { get; set; }
 
-		[HasOne("image")]
+		[HasOne(PublicName = "image")]
 		public Image Image { get; set; }
 
-		[HasMany("articles")]
+		[HasMany(PublicName = "articles")]
 		public ICollection<Article> Articles { get; set; }
 	}
 }

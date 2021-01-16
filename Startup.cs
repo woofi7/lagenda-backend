@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using JsonApiDotNetCore.Extensions;
+﻿using JsonApiDotNetCore.Configuration;
 using LagendaBackend.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace LagendaBackend
 {
@@ -30,16 +23,20 @@ namespace LagendaBackend
 		{
 			services.AddDbContext<AppDbContext>();
 
-			services.AddJsonApi<AppDbContext>(options =>
-			{
-				options.Namespace = "api/v1";
-				options.DefaultPageSize = 20;
-				options.IncludeTotalRecordCount = true;
-				options.ValidateModelState = true;
-			});
+			services.AddJsonApi<AppDbContext>(
+				options =>
+				{
+					options.Namespace = "api/v1";
+					options.ValidateModelState = true;
+					options.IncludeExceptionStackTraceInErrors = true;
+					options.SerializerSettings.ContractResolver = new DefaultContractResolver
+					{
+						NamingStrategy = new KebabCaseNamingStrategy()
+					};
+				});
 
 			services.AddCors();
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+			services.AddControllers();
 
 			services.AddSwaggerGen(c =>
 			{
@@ -50,6 +47,8 @@ namespace LagendaBackend
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
+			app.UseRouting();
+
 			app.UseCors(
 				options => options.WithOrigins("http://localhost:4200", "https://www.lagenda.ca", "https://lagenda.ca").AllowAnyMethod()
 			);
@@ -68,13 +67,11 @@ namespace LagendaBackend
 			}
 			else
 			{
-				//app.UseHsts();
+				app.UseHttpsRedirection();
 			}
 
-
 			app.UseJsonApi();
-			app.UseHttpsRedirection();
-			app.UseMvc();
+			app.UseEndpoints(endpoints => endpoints.MapControllers());
 		}
 	}
 }

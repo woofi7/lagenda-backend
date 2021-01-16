@@ -8,7 +8,7 @@ namespace LagendaBackend.Controllers
 {
 	public class BaladoCategories : JsonApiController<BaladoCategory>
 	{
-		public BaladoCategories(IJsonApiContext jsonApiContext, IResourceService<BaladoCategory, int> resourceService, ILoggerFactory loggerFactory) : base(jsonApiContext, resourceService, loggerFactory)
+		public BaladoCategories(IJsonApiOptions options, ILoggerFactory loggerFactory, IResourceService<BaladoCategory, int> resourceService) : base(options, loggerFactory, resourceService)
 		{
 		}
 	}

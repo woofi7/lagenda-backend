@@ -1,22 +1,22 @@
-using JsonApiDotNetCore.Models;
+using JsonApiDotNetCore.Resources.Annotations;
 
 namespace LagendaBackend.Models
 {
 	public class Balado : Element
 	{
-		[Attr("apple-link")]
+		[Attr(PublicName = "apple-link")]
 		public string AppleLink { get; set; }
 
-		[Attr("google-link")]
+		[Attr(PublicName = "google-link")]
 		public string GoogleLink { get; set; }
 
-		[Attr("spotify-link")]
+		[Attr(PublicName = "spotify-link")]
 		public string SpotifyLink { get; set; }
 
-		[Attr("episode-number")]
+		[Attr(PublicName = "episode-number")]
 		public int EpisodeNumber { get; set; }
 
-		[HasOne("balado-category")]
+		[HasOne(PublicName = "balado-category")]
 		public BaladoCategory BaladoCategory { get; set; }
 	}
 }

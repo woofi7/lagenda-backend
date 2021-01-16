@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -9,12 +9,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="JsonApiDotNetCore" Version="3.1.0" />
-        <PackageReference Include="Microsoft.AspNetCore.App" />
-        <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.4" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
+        <PackageReference Include="JsonApiDotNetCore" Version="4.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.2" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0-alpha.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
 
 </Project>

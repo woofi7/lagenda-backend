@@ -1,16 +1,17 @@
-using JsonApiDotNetCore.Models;
+using JsonApiDotNetCore.Resources;
+using JsonApiDotNetCore.Resources.Annotations;
 
 namespace LagendaBackend.Models
 {
 	public class SocialLink : Identifiable
 	{
-		[Attr("link")]
+		[Attr(PublicName = "link")]
 		public string Link { get; set; }
 
-		[Attr("type")]
+		[Attr(PublicName = "type")]
 		public string Type { get; set; }
 
-		[HasOne("author")]
+		[HasOne(PublicName = "author")]
 		public Author Author { get; set; }
 	}
 }

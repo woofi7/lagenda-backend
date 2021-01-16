@@ -1,16 +1,17 @@
-using JsonApiDotNetCore.Models;
+using JsonApiDotNetCore.Resources;
+using JsonApiDotNetCore.Resources.Annotations;
 
 namespace LagendaBackend.Models
 {
 	public class Image : Identifiable
 	{
-		[Attr("url")]
+		[Attr(PublicName = "url")]
 		public string Url { get; set; }
 
-		[Attr("alt")]
+		[Attr(PublicName = "alt")]
 		public string Alt { get; set; }
 
-		[Attr("credits")]
+		[Attr(PublicName = "credits")]
 		public string Credits { get; set; }
 	}
 }

@@ -1,5 +1,3 @@
-using JsonApiDotNetCore.Models;
-
 namespace LagendaBackend.Models.ManyToMany
 {
 	public sealed class ArticleAuthor

@@ -1,17 +1,18 @@
 using System.Collections.Generic;
-using JsonApiDotNetCore.Models;
+using JsonApiDotNetCore.Resources;
+using JsonApiDotNetCore.Resources.Annotations;
 
 namespace LagendaBackend.Models
 {
 	public class BaladoCategory : Identifiable
 	{
-		[Attr("name")]
+		[Attr(PublicName = "name")]
 		public string Name { get; set; }
 
-		[Attr("order")]
+		[Attr(PublicName = "order")]
 		public int? Order { get; set; }
 
-		[HasMany("balados")]
+		[HasMany(PublicName = "balados")]
 		public ICollection<Balado> Balados { get; set; }
 	}
 }

@@ -1,26 +1,27 @@
 using System;
-using JsonApiDotNetCore.Models;
+using JsonApiDotNetCore.Resources;
+using JsonApiDotNetCore.Resources.Annotations;
 
 namespace LagendaBackend.Models
 {
 	public class Element : Identifiable
 	{
-		[Attr("title")]
+		[Attr(PublicName = "title")]
 		public string Title { get; set; }
 
-		[Attr("post-datetime")]
+		[Attr(PublicName = "post-datetime")]
 		public DateTime PostDatetime { get; set; }
 
-		[Attr("update-datetime")]
+		[Attr(PublicName = "update-datetime")]
 		public DateTime UpdateDatetime { get; set; }
 
-		[Attr("desc")]
+		[Attr(PublicName = "desc")]
 		public string Desc { get; set; }
 
-		[Attr("unlisted")]
+		[Attr(PublicName = "unlisted")]
 		public bool Unlisted { get; set; }
 
-		[HasOne("image")]
+		[HasOne(PublicName = "image")]
 		public Image Image { get; set; }
 	}
 }
