@@ -1,6 +1,7 @@
 using JsonApiDotNetCore.Configuration;
 using JsonApiDotNetCore.Controllers;
 using JsonApiDotNetCore.Services;
+using LagendaBackend.Data.Models;
 using LagendaBackend.Models;
 using Microsoft.Extensions.Logging;
 

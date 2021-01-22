@@ -1,9 +1,17 @@
 ﻿using JsonApiDotNetCore.Configuration;
+using LagendaBackend.Clients;
+using LagendaBackend.Configuration;
+using LagendaBackend.Data.Models;
+using LagendaBackend.Middlewares;
 using LagendaBackend.Models;
+using LagendaBackend.Services;
+using LagendaBackend.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 
@@ -11,17 +19,19 @@ namespace LagendaBackend
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
-
-		public IConfiguration Configuration { get; }
-
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<AppDbContext>();
+			services.AddApplicationInsightsTelemetry();
+
+			services.AddDbContext<AppDbContext>((sp, builder ) =>
+			{
+				var config = sp.GetRequiredService<IConfiguration>();
+				builder.UseMySql(config.GetConnectionString("MysqlConnectionString"),
+					ServerVersion.AutoDetect(config.GetConnectionString("MysqlConnectionString")),
+					mySqlOptions => mySqlOptions.EnableRetryOnFailure()
+				);
+			});
 
 			services.AddJsonApi<AppDbContext>(
 				options =>
@@ -33,7 +43,8 @@ namespace LagendaBackend
 					{
 						NamingStrategy = new KebabCaseNamingStrategy()
 					};
-				});
+					options.EnableResourceHooks = true;
+				}, discovery => discovery.AddCurrentAssembly());
 
 			services.AddCors();
 			services.AddControllers();
@@ -42,6 +53,14 @@ namespace LagendaBackend
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "L'Agenda API", Version = "v1" });
 			});
+
+			services.AddOptions<GoogleConfiguration>().BindConfiguration("Google").ValidateDataAnnotations();
+			services.AddOptions<AuthenticationConfiguration>().BindConfiguration("Authentication").ValidateDataAnnotations();
+
+			services.AddSingleton<GoogleClient>();
+			services.AddSingleton<Base64Util>();
+			services.AddSingleton<JwtParser>();
+			services.AddSingleton<JwtService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,9 +68,15 @@ namespace LagendaBackend
 		{
 			app.UseRouting();
 
+
 			app.UseCors(
-				options => options.WithOrigins("http://localhost:4200", "https://www.lagenda.ca", "https://lagenda.ca").AllowAnyMethod()
+				options => options
+					.WithOrigins("http://localhost:4200", "https://www.lagenda.ca", "https://lagenda.ca")
+					.AllowAnyMethod()
+					.WithHeaders("content-type", "authorization")
 			);
+
+			app.UseMiddleware<AuthenticationMiddleware>();
 
 			if (env.IsDevelopment())
 			{

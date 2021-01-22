@@ -1,21 +1,13 @@
-using LagendaBackend.Models.ManyToMany;
+using LagendaBackend.Data.Models.ManyToMany;
+using LagendaBackend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace LagendaBackend.Models
+namespace LagendaBackend.Data.Models
 {
 	public class AppDbContext : DbContext
 	{
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
 		{ }
-
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			var connectionString = "Server=localhost;Database=lagenda_api;Password=[x#[t?RCaGSZ#9r7;User=lagenda;";
-			optionsBuilder.UseMySql(connectionString,
-				ServerVersion.AutoDetect(connectionString),
-				mySqlOptions => mySqlOptions.EnableRetryOnFailure()
-				);
-		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -31,5 +23,6 @@ namespace LagendaBackend.Models
 		public DbSet<Image> Images { get; set; }
 		public DbSet<ArticleAuthor> ArticleAuthors { get; set; }
 		public DbSet<SocialLink> SocialLinks { get; set; }
+		public DbSet<Profile> Profiles { get; set; }
 	}
 }

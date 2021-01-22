@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using JsonApiDotNetCore.Controllers.Annotations;
 using JsonApiDotNetCore.Services;
+using LagendaBackend.Data.Models;
 using LagendaBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using JsonApiDotNetCore.Resources.Annotations;
-using LagendaBackend.Models.ManyToMany;
+using LagendaBackend.Data.Models.ManyToMany;
 
-namespace LagendaBackend.Models
+namespace LagendaBackend.Data.Models
 {
 	public class Article : Element
 	{

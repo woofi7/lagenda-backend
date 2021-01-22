@@ -1,8 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using JsonApiDotNetCore.Resources;
 using JsonApiDotNetCore.Resources.Annotations;
 
-namespace LagendaBackend.Models
+namespace LagendaBackend.Data.Models
 {
 	public class Element : Identifiable
 	{

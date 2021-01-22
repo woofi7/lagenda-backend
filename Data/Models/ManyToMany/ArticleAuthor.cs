@@ -1,4 +1,7 @@
-namespace LagendaBackend.Models.ManyToMany
+using JsonApiDotNetCore.Resources;
+using LagendaBackend.Models;
+
+namespace LagendaBackend.Data.Models.ManyToMany
 {
 	public sealed class ArticleAuthor
 	{

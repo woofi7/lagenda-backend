@@ -1,7 +1,7 @@
 using JsonApiDotNetCore.Resources;
 using JsonApiDotNetCore.Resources.Annotations;
 
-namespace LagendaBackend.Models
+namespace LagendaBackend.Data.Models
 {
 	public class Image : Identifiable
 	{

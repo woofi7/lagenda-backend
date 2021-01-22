@@ -1,6 +1,6 @@
 using JsonApiDotNetCore.Resources.Annotations;
 
-namespace LagendaBackend.Models
+namespace LagendaBackend.Data.Models
 {
 	public class Balado : Element
 	{
