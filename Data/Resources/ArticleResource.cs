@@ -4,18 +4,23 @@ using JsonApiDotNetCore.Configuration;
 using JsonApiDotNetCore.Queries.Expressions;
 using JsonApiDotNetCore.Resources;
 using LagendaBackend.Data.Models;
+using LagendaBackend.Services;
 
 namespace LagendaBackend.Data.Resources
 {
 	public class ArticleResource : JsonApiResourceDefinition<Article>
 	{
-		public ArticleResource(IResourceGraph resourceGraph) : base(resourceGraph)
+		private readonly AuthenticationService _authenticationService;
+		public ArticleResource(IResourceGraph resourceGraph, AuthenticationService authenticationService) : base(resourceGraph)
 		{
-
+			_authenticationService = authenticationService;
 		}
 
 		public override FilterExpression OnApplyFilter(FilterExpression existingFilter)
 		{
+			if (_authenticationService.CurrentUserHasPermission(Permissions.Article.ViewUnpublished))
+				return existingFilter;
+
 			var resourceContext = ResourceGraph.GetResourceContext<Article>();
 
 			var unlistedAttribute =

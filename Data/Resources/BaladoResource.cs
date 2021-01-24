@@ -36,5 +36,18 @@ namespace LagendaBackend.Data.Resources
 				: new LogicalExpression(LogicalOperator.And,
 					new[] {isUnlisted, isPublished, existingFilter});
 		}
+
+		// public override IEnumerable<Person> OnReturn(HashSet<Person> entities, ResourcePipeline pipeline)
+		// {
+		// 	if (!_auth.CanSeeSecretPeople())
+		// 	{
+		// 		if (pipeline == ResourcePipeline.GetSingle)
+		// 		{
+		// 			throw new JsonApiException(403, "Forbidden to view this person", new  UnauthorizedAccessException());
+		// 		}
+		// 		entities = entities.Where( p => !p.IsSecret)
+		// 	}
+		// 	return entities;
+		// }
 	}
 }

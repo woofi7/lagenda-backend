@@ -38,16 +38,17 @@ namespace LagendaBackend
 				{
 					options.Namespace = "api/v1";
 					options.ValidateModelState = true;
-					options.IncludeExceptionStackTraceInErrors = true;
 					options.SerializerSettings.ContractResolver = new DefaultContractResolver
 					{
 						NamingStrategy = new KebabCaseNamingStrategy()
 					};
 					options.EnableResourceHooks = true;
+					options.IncludeTotalResourceCount = true;
 				}, discovery => discovery.AddCurrentAssembly());
 
 			services.AddCors();
 			services.AddControllers();
+			services.AddHttpContextAccessor();
 
 			services.AddSwaggerGen(c =>
 			{
@@ -58,9 +59,11 @@ namespace LagendaBackend
 			services.AddOptions<AuthenticationConfiguration>().BindConfiguration("Authentication").ValidateDataAnnotations();
 
 			services.AddSingleton<GoogleClient>();
-			services.AddSingleton<Base64Util>();
 			services.AddSingleton<JwtParser>();
 			services.AddSingleton<JwtService>();
+			services.AddScoped<AuthenticationService>();
+			services.AddSingleton<Base64Util>();
+			services.AddSingleton<PermissionUtils>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
