@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 
 namespace LagendaBackend.Controllers
 {
+	[Route("/api/v1")]
 	[ApiController]
 	public class OAuth2Controller : ControllerBase
 	{

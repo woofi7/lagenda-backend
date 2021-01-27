@@ -10,7 +10,7 @@
 
     <ItemGroup>
         <PackageReference Include="jose-jwt" Version="3.0.0" />
-        <PackageReference Include="JsonApiDotNetCore" Version="4.0.2-dev-21" />
+        <PackageReference Include="JsonApiDotNetCore" Version="4.0.2-dev-22" />
         <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.16.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.2">

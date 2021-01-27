@@ -10,8 +10,5 @@ namespace LagendaBackend.Data.Models
 
 		[Attr(PublicName = "type")]
 		public string Type { get; set; }
-
-		[HasOne(PublicName = "author")]
-		public Author Author { get; set; }
 	}
 }

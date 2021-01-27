@@ -1,4 +1,5 @@
-﻿using JsonApiDotNetCore.Configuration;
+﻿using System.Net;
+using JsonApiDotNetCore.Configuration;
 using LagendaBackend.Clients;
 using LagendaBackend.Configuration;
 using LagendaBackend.Data.Models;
@@ -8,6 +9,8 @@ using LagendaBackend.Services;
 using LagendaBackend.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +25,10 @@ namespace LagendaBackend
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.Configure<ForwardedHeadersOptions>(options =>
+			{
+				options.ForwardedHeaders = ForwardedHeaders.All;
+			});
 			services.AddApplicationInsightsTelemetry();
 
 			services.AddDbContext<AppDbContext>((sp, builder ) =>
@@ -69,6 +76,7 @@ namespace LagendaBackend
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
+			app.UseForwardedHeaders();
 			app.UseRouting();
 
 
@@ -100,6 +108,11 @@ namespace LagendaBackend
 
 			app.UseJsonApi();
 			app.UseEndpoints(endpoints => endpoints.MapControllers());
+			app.Use((context, _) =>
+			{
+				context.Response.StatusCode = StatusCodes.Status404NotFound;
+				return context.Response.WriteAsJsonAsync(new {message = "Route not found."});
+			});
 		}
 	}
 }

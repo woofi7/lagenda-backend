@@ -23,6 +23,9 @@ namespace LagendaBackend.Data.Models
 		[Attr(PublicName = "collaborator")]
 		public bool Collaborator { get; set; }
 
+		[Attr(PublicName = "partner")]
+		public bool Partner { get; set; }
+
 		[Attr(PublicName = "order")]
 		public int? Order { get; set; }
 
@@ -30,7 +33,7 @@ namespace LagendaBackend.Data.Models
 		public Image Image { get; set; }
 
 		[HasMany(PublicName = "social-links")]
-		public ICollection<SocialLink> SocialLinks { get; set; }
+		public List<SocialLink> SocialLinks { get; set; }
 
 		[NotMapped]
 		[HasManyThrough(nameof(ArticleAuthors))]
