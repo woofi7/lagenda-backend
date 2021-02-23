@@ -13,9 +13,9 @@ namespace LagendaBackend.Services
 		private readonly PermissionUtils _permissionUtils;
 		private readonly AppDbContext _dbContext;
 
-		public readonly string[] RoleAdmin = { "*", "article.view-all" };
-		public readonly string[] RoleWriter = { Permissions.Article.All };
-		public readonly string[] RolesViewer = { Permissions.Article.ViewUnpublished };
+		public readonly string[] RoleAdmin = { Permissions.General.ViewUnpublished };
+		public readonly string[] RoleWriter = { };
+		public readonly string[] RolesViewer = { Permissions.General.ViewUnpublished };
 		public readonly string[] RolesAnonymous = Array.Empty<string>();
 
 		public AuthenticationService(IHttpContextAccessor httpContextAccessor, PermissionUtils permissionUtils, AppDbContext dbContext)
@@ -51,6 +51,10 @@ namespace LagendaBackend.Services
 
 	public static class Permissions
 	{
+		public  static class General
+		{
+			public const string ViewUnpublished = "general.*";
+		}
 		public static class Article
 		{
 			public const string All = "article.*";

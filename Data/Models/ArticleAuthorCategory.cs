@@ -4,7 +4,7 @@ using JsonApiDotNetCore.Resources.Annotations;
 
 namespace LagendaBackend.Data.Models
 {
-	public class BaladoCategory : Identifiable
+	public class ArticleAuthorCategory : Identifiable
 	{
 		[Attr(PublicName = "name")]
 		public string Name { get; set; }
@@ -12,19 +12,16 @@ namespace LagendaBackend.Data.Models
 		[Attr(PublicName = "order")]
 		public int? Order { get; set; }
 
-		[Attr(PublicName = "desc")]
-		public string Desc { get; set; }
-
 		[Attr(PublicName = "unlisted")]
 		public bool Unlisted { get; set; }
+
+		[Attr(PublicName = "external-link")]
+		public string ExternalLink { get; set; }
 
 		[HasOne(PublicName = "image")]
 		public Image Image { get; set; }
 
-		[HasOne(PublicName = "partner")]
-		public BaladoPartner BaladoPartner { get; set; }
-
-		[HasMany(PublicName = "balados")]
-		public ICollection<Balado> Balados { get; set; }
+		[HasMany(PublicName = "articles")]
+		public ICollection<Article> Articles { get; set; }
 	}
 }

@@ -3,14 +3,16 @@ using System;
 using LagendaBackend.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LagendaBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210127195523_AddBaladoCategoryImageAndDesc")]
+    partial class AddBaladoCategoryImageAndDesc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,9 +23,6 @@ namespace LagendaBackend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ArticleAuthorCategoryId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ArticleCategoryId")
@@ -52,46 +51,11 @@ namespace LagendaBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleAuthorCategoryId");
-
                     b.HasIndex("ArticleCategoryId");
 
                     b.HasIndex("ImageId");
 
                     b.ToTable("Articles");
-                });
-
-            modelBuilder.Entity("LagendaBackend.Data.Models.ArticleAuthorCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ArticleCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ExternalLink")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int?>("Order")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Unlisted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleCategoryId");
-
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("ArticleAuthorCategories");
                 });
 
             modelBuilder.Entity("LagendaBackend.Data.Models.ArticleCategory", b =>
@@ -100,23 +64,14 @@ namespace LagendaBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("ExternalLink")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<int?>("ImageId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsPartner")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int?>("Order")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Unlisted")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
@@ -216,9 +171,6 @@ namespace LagendaBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("BaladoPartnerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Desc")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -231,44 +183,11 @@ namespace LagendaBackend.Migrations
                     b.Property<int?>("Order")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Unlisted")
-                        .HasColumnType("tinyint(1)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("BaladoPartnerId");
 
                     b.HasIndex("ImageId");
 
                     b.ToTable("BaladoCategories");
-                });
-
-            modelBuilder.Entity("LagendaBackend.Data.Models.BaladoPartner", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Desc")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int?>("Order")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Unlisted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("BaladoPartners");
                 });
 
             modelBuilder.Entity("LagendaBackend.Data.Models.Image", b =>
@@ -359,10 +278,6 @@ namespace LagendaBackend.Migrations
 
             modelBuilder.Entity("LagendaBackend.Data.Models.Article", b =>
                 {
-                    b.HasOne("LagendaBackend.Data.Models.ArticleAuthorCategory", null)
-                        .WithMany("Articles")
-                        .HasForeignKey("ArticleAuthorCategoryId");
-
                     b.HasOne("LagendaBackend.Data.Models.ArticleCategory", "ArticleCategory")
                         .WithMany("Articles")
                         .HasForeignKey("ArticleCategoryId");
@@ -372,19 +287,6 @@ namespace LagendaBackend.Migrations
                         .HasForeignKey("ImageId");
 
                     b.Navigation("ArticleCategory");
-
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("LagendaBackend.Data.Models.ArticleAuthorCategory", b =>
-                {
-                    b.HasOne("LagendaBackend.Data.Models.ArticleCategory", null)
-                        .WithMany("ArticleAuthorCategories")
-                        .HasForeignKey("ArticleCategoryId");
-
-                    b.HasOne("LagendaBackend.Data.Models.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
 
                     b.Navigation("Image");
                 });
@@ -424,21 +326,6 @@ namespace LagendaBackend.Migrations
 
             modelBuilder.Entity("LagendaBackend.Data.Models.BaladoCategory", b =>
                 {
-                    b.HasOne("LagendaBackend.Data.Models.BaladoPartner", "BaladoPartner")
-                        .WithMany("BaladoCategories")
-                        .HasForeignKey("BaladoPartnerId");
-
-                    b.HasOne("LagendaBackend.Data.Models.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("BaladoPartner");
-
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("LagendaBackend.Data.Models.BaladoPartner", b =>
-                {
                     b.HasOne("LagendaBackend.Data.Models.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
@@ -477,15 +364,8 @@ namespace LagendaBackend.Migrations
                     b.Navigation("ArticleAuthors");
                 });
 
-            modelBuilder.Entity("LagendaBackend.Data.Models.ArticleAuthorCategory", b =>
-                {
-                    b.Navigation("Articles");
-                });
-
             modelBuilder.Entity("LagendaBackend.Data.Models.ArticleCategory", b =>
                 {
-                    b.Navigation("ArticleAuthorCategories");
-
                     b.Navigation("Articles");
                 });
 
@@ -499,11 +379,6 @@ namespace LagendaBackend.Migrations
             modelBuilder.Entity("LagendaBackend.Data.Models.BaladoCategory", b =>
                 {
                     b.Navigation("Balados");
-                });
-
-            modelBuilder.Entity("LagendaBackend.Data.Models.BaladoPartner", b =>
-                {
-                    b.Navigation("BaladoCategories");
                 });
 #pragma warning restore 612, 618
         }

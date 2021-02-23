@@ -10,9 +10,9 @@ using Microsoft.Extensions.Logging;
 
 namespace LagendaBackend.Controllers
 {
-	public class BaladoCategories : JsonApiController<BaladoCategory>
+	public class BaladoCategoriesController : JsonApiController<BaladoCategory>
 	{
-		public BaladoCategories(IJsonApiOptions options, ILoggerFactory loggerFactory, IResourceService<BaladoCategory, int> resourceService) : base(options, loggerFactory, resourceService)
+		public BaladoCategoriesController(IJsonApiOptions options, ILoggerFactory loggerFactory, IResourceService<BaladoCategory, int> resourceService) : base(options, loggerFactory, resourceService)
 		{
 		}
 	}

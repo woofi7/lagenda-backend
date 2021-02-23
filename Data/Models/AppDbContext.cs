@@ -17,6 +17,7 @@ namespace LagendaBackend.Data.Models
 
 		public DbSet<Article> Articles { get; set; }
 		public DbSet<ArticleCategory> ArticleCategories { get; set; }
+		public DbSet<ArticleAuthorCategory> ArticleAuthorCategories { get; set; }
 		public DbSet<Author> Authors { get; set; }
 		public DbSet<Balado> Balados { get; set; }
 		public DbSet<BaladoCategory> BaladoCategories { get; set; }
@@ -24,5 +25,6 @@ namespace LagendaBackend.Data.Models
 		public DbSet<ArticleAuthor> ArticleAuthors { get; set; }
 		public DbSet<SocialLink> SocialLinks { get; set; }
 		public DbSet<Profile> Profiles { get; set; }
+		public DbSet<BaladoPartner> BaladoPartners { get; set; }
 	}
 }

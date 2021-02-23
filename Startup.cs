@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using JsonApiDotNetCore.Configuration;
+using JsonApiDotNetCore.Resources.Annotations;
 using LagendaBackend.Clients;
 using LagendaBackend.Configuration;
 using LagendaBackend.Data.Models;
@@ -51,6 +52,7 @@ namespace LagendaBackend
 					};
 					options.EnableResourceHooks = true;
 					options.IncludeTotalResourceCount = true;
+					options.DefaultPageSize = new PageSize(100);
 				}, discovery => discovery.AddCurrentAssembly());
 
 			services.AddCors();
