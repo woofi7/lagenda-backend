@@ -21,6 +21,9 @@ namespace LagendaBackend.Data.Models
 		[HasOne(PublicName = "image")]
 		public Image Image { get; set; }
 
+		[HasOne(PublicName = "article-category")]
+		public ArticleCategory ArticleCategory { get; set; }
+
 		[HasMany(PublicName = "articles")]
 		public ICollection<Article> Articles { get; set; }
 	}

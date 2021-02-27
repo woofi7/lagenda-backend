@@ -13,6 +13,9 @@ namespace LagendaBackend.Data.Models
 		[HasOne(PublicName = "article-category")]
 		public ArticleCategory ArticleCategory { get; set; }
 
+		[HasOne(PublicName = "article-author-category")]
+		public ArticleAuthorCategory ArticleAuthorCategory { get; set; }
+
 		[NotMapped]
 		[HasManyThrough(nameof(ArticleAuthors))]
 		public List<Author> Authors { get; set; }
