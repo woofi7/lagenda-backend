@@ -4,6 +4,9 @@ namespace LagendaBackend.Data.Models
 {
 	public class Balado : Element
 	{
+		[Attr(PublicName = "simple-cast-id")]
+		public string SimpleCastId { get; set; }
+
 		[Attr(PublicName = "apple-link")]
 		public string AppleLink { get; set; }
 
