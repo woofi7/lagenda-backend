@@ -16,6 +16,12 @@ namespace LagendaBackend.Data.Models
 		[Attr(PublicName = "spotify-link")]
 		public string SpotifyLink { get; set; }
 
+		[Attr(PublicName = "soundcloud-link")]
+		public string SoundcloudLink { get; set; }
+
+		[Attr(PublicName = "youtube-link")]
+		public string YoutubeLink { get; set; }
+
 		[Attr(PublicName = "episode-number")]
 		public int EpisodeNumber { get; set; }
 
