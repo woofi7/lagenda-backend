@@ -30,7 +30,6 @@ namespace LagendaBackend.Services
 			if (!(_httpContextAccessor.HttpContext?.Items[typeof(JwtTokenPayload)] is JwtTokenPayload payload))
 				return _permissionUtils.CheckPermissions(RolesAnonymous, permission);
 
-
 			var profile = _dbContext.Set<Profile>().Find(payload.UserId);
 			if (profile == null)
 				return _permissionUtils.CheckPermissions(RolesAnonymous, permission);
@@ -46,6 +45,14 @@ namespace LagendaBackend.Services
 				default:
 					return _permissionUtils.CheckPermissions(RolesAnonymous, permission);
 			}
+		}
+
+		public ValueTask<Profile> GetCurrentProfile()
+		{
+			if (!(_httpContextAccessor.HttpContext?.Items[typeof(JwtTokenPayload)] is JwtTokenPayload payload))
+				return new ValueTask<Profile>(Task.FromResult<Profile>(null));
+
+			return _dbContext.Set<Profile>().FindAsync(payload.UserId);
 		}
 	}
 

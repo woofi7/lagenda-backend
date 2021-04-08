@@ -23,7 +23,7 @@ namespace LagendaBackend.Data.Models
 		public string YoutubeLink { get; set; }
 
 		[Attr(PublicName = "episode-number")]
-		public int EpisodeNumber { get; set; }
+		public int? EpisodeNumber { get; set; }
 
 		[HasOne(PublicName = "balado-category")]
 		public BaladoCategory BaladoCategory { get; set; }

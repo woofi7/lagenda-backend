@@ -26,5 +26,6 @@ namespace LagendaBackend.Data.Models
 		public DbSet<SocialLink> SocialLinks { get; set; }
 		public DbSet<Profile> Profiles { get; set; }
 		public DbSet<BaladoPartner> BaladoPartners { get; set; }
+		public DbSet<File> Files { get; set; }
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Azure.Storage.Blobs;
 using JsonApiDotNetCore.Configuration;
 using JsonApiDotNetCore.Resources.Annotations;
 using LagendaBackend.Clients;
@@ -73,6 +74,7 @@ namespace LagendaBackend
 			services.AddScoped<AuthenticationService>();
 			services.AddSingleton<Base64Util>();
 			services.AddSingleton<PermissionUtils>();
+			services.AddSingleton(sp => new BlobServiceClient(sp.GetRequiredService<IConfiguration>().GetValue<string>("FileStorage:ConnectionString")));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

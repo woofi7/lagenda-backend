@@ -13,5 +13,10 @@ namespace LagendaBackend.Data.Models
 
 		[Attr(PublicName = "credits")]
 		public string Credits { get; set; }
+
+		public File File { get; set; }
+
+		[Attr(PublicName = "name")]
+		public string Name { get; set; }
 	}
 }
